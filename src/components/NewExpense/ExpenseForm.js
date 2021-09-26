@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import '../css/ExpenseForm.css';    
-const ExpenseForm = () =>{
+const ExpenseForm = (props) =>{
 
     const [enteredTitle, setEnteredTitle] = useState('');
     const [enteredAmount, setEnteredAmount] = useState('');
@@ -54,7 +54,7 @@ const ExpenseForm = () =>{
             date: new Date(enteredDate)
         };
 
-        console.log(expenseData)
+        props.onSaveExpenseData(expenseData); // to communicate with the parent component
         setEnteredDate(''); // this will perform the two-way binding, when the state is changed on submit, it will 
         setEnteredTitle(''); // make the input to be set on the given string which is empty
         setEnteredAmount('');
