@@ -29,8 +29,8 @@ const App = () => {
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES)
 
   const addExpenseHandler = expense => {
-    setExpenses((prevExpense) => {
-      return [expense, ...expenses]; // spread operator for the prev values in DUMMY_Expenses
+    setExpenses((prevExpenses) => {
+      return [expense, ...prevExpenses]; // spread operator for the prev values in DUMMY_Expenses
     });
   };
 

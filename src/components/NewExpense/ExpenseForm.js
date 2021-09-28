@@ -6,7 +6,7 @@ const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredAmount, setEnteredAmount] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
-  // const [userInput, setUserInput] = useState({
+  // const [userInput, setUserInput] = useState({       // using only one UseState!
   //   enteredTitle: '',
   //   enteredAmount: '',
   //   enteredDate: '',
@@ -14,13 +14,14 @@ const ExpenseForm = (props) => {
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
-    // setUserInput({
-    //   ...userInput,
-    //   enteredTitle: event.target.value,
-    // });
-    // setUserInput((prevState) => {
-    //   return { ...prevState, enteredTitle: event.target.value };
-    // });
+    // setUserInput({           // in case of single useState!
+        //     ...userInput,   // using spread operator here, it will take all available objects, and add changes only in enteredTitle. Same for other inputs
+        //     enteredTitle: event.target.value,
+        // }) 
+        // if your state update depends on the prev state, use below method.
+        // setUserInput((prevState) => {
+        //     return { ...prevState, enteredTitle: event.target.value};
+        // });
   };
 
   const amountChangeHandler = (event) => {
@@ -44,13 +45,13 @@ const ExpenseForm = (props) => {
 
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
 
-    props.onSaveExpenseData(expenseData);
-    setEnteredTitle('');
-    setEnteredAmount('');
+    props.onSaveExpenseData(expenseData);   // to communicate with the parent component
+    setEnteredTitle('');                    // this will perform the two-way binding, when the state is changed on submit, it will
+    setEnteredAmount('');                   // make the input to be set on the given string which is empty
     setEnteredDate('');
   };
 
